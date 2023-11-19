@@ -1,0 +1,16 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+  epr.db:
+    class: Epr\DietManager\Database\Database
+  epr.user:
+    class: Epr\DietManager\Users\User
+    arguments:
+      - '@epr.db'
+  epr.adminpages:
+    class: Epr\DietManager\AdminPages\AdminUsersPage
+    arguments:
+      - '@epr.user'
+      - '@epr.db'
+

@@ -1,0 +1,78 @@
+<h2>New User</h2>
+<hr>
+
+<p>User</p>
+<p>user_id: {{user.user_id}}</p>
+<hr>
+
+<h3>Messages: </h3>
+
+<ul>
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+
+
+
+<div class="container ">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <form  action="admin.php?page=user-form" method="POST">  
+
+                <div class="form-group row mb-3">
+                    <div class="col-sm-4">
+                        <label for="inputNombre">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="inputNombre" placeholder="Nombre" >
+                    </div>
+                    <div class="col-sm-8">
+                        <label for="inputApellidos">Apellidos</label>
+                        <input type="text" class="form-control" name="apellidos" id="inputApellidos" placeholder="Apellidos">
+                    </div>
+                </div>
+
+
+                <div class="form-group row mb-3">
+                    <div class="col-sm-4">
+                        <label for="inputTelefono">Teléfono</label>
+                        <input type="number" class="form-control" name="telefono" id="inputTelefono" placeholder="Teléfono">
+                    </div>
+                    <div class="col-sm-8">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email">
+                    </div>
+                </div>
+
+
+                <div class="form-group row mb-3">
+                    <div class="col-sm-12">
+                        <label for="inputDireccion">Direccion</label>
+                        <input type="text" class="form-control" name="direccion" id="inputDireccion" placeholder="Direccion">
+                    </div>
+                </div>
+
+
+                <div class="form-group row mb-3">
+                    <div class="col-sm-4">
+                        <label for="inputProvincia">Provincia</label>
+                        <input type="text" class="form-control" name="provincia" id="inputProvincia" placeholder="Provincia">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="inputLocalidad">Localidad</label>
+                        <input type="text" class="form-control" name="localidad" id="inputLocalidad" placeholder="Localidad">
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="inputCodigoPostal">Código postal</label>
+                        <input type="text" class="form-control" name="cp" id="inputCodigoPostal" placeholder="Código postal">
+                    </div>
+                </div>
+
+                <input type="hidden" id="_wpnonce" name="_wpnonce" value="{{nonce}}" />
+                <button type="submit" name="submit" class="btn btn-primary px-4 float-right">Guardar</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+

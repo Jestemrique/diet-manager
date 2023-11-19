@@ -1,0 +1,12 @@
+.user-name{
+    color: green;
+};
+
+.actions{
+    visibility:hidden;
+}
+
+/* .user-name:hover + .actions{
+    
+    color: red;
+} */
