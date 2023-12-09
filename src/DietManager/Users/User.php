@@ -25,19 +25,6 @@ class User{
       return $users;
     }//End getUsers();
 
-    // public function registerUser($user_id){
-    //   $user_login = $_POST['user_login'];
-    //   $user_email = $_POST['user_email'];
-    //   $user = array(
-    //     'user_id' => $user_id,
-    //     'user_name' => $user_login,
-    //     'user_email' => $user_email
-    //   );
-      
-    //   $this->saveUser($user);
-    // }//End registerUser();
-
-
     public function creaNuevoUsuario() {
       if ( isset( $_POST['_wpnonce'] )  && wp_verify_nonce( $_POST['_wpnonce'], 'guardar_usuario' )   ){
         $userData = array(
@@ -127,6 +114,11 @@ class User{
     public function updateUser($user, $user_id){
       $this->eprdb->updateUser($user, $user_id);
     }
+
+    public function deleteUsers( $user_ids) {
+      $result = $this->eprdb->deleteEprUsers ( $user_ids);
+      return $result;
+    }//End deleteUSers();
 
 
 

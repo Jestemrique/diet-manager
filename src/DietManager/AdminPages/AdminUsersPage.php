@@ -10,10 +10,8 @@ class AdminUsersPage{
     private $page_title = 'Diet users';
     private $menu_title = 'Diet users';
     private $main_menu_slug = 'diet-users';
-    //private $template;
 
     public function __construct(
-                                //private Database $eprdb
                                 private \Epr\DietManager\Users\User $user,
                                 private \Twig\Environment $template
                                 ){
@@ -23,7 +21,6 @@ class AdminUsersPage{
         //Create admin menu for users.
         add_action('admin_menu', array($this, 'createAdminMenu'), 10);
         add_action('admin_menu', array($this, 'createNewUserMenu'), 10);
-  
         add_action( 'admin_enqueue_scripts', array($this, 'load_scripts' ));
         
     }//End construct.
@@ -35,7 +32,6 @@ class AdminUsersPage{
             'Nuevo usuario',
             'activate_plugins',
             'user-form',
-            //array($this, 'userFormPageContent'),
             array($this, 'userFormPageContent'),
         );
     }//End createNewUserMenu();
@@ -67,24 +63,17 @@ class AdminUsersPage{
                 $this->user->updateUser($completeUser, $completeUser['user_id']);
             } else {
                 echo "Nuevo usuario<br>";
-                //REgistrar el usuario en la tabla wp-user y también en la tabla epr-users.
-                
-                //do_action('user_register', array($this->user,'registerUser'));
+                //Registrar el usuario en la tabla wp-user y también en la tabla epr-users.
                 $resultado = $this->user->creaNuevoUsuario();
 
                 if (gettype($resultado) == 'integer'){
-                    //$message = "Nuevo usuario añadido con éxito.";
                     array_push($messages, "Nuevo usuario añadido con éxito.");
-
                 }
 
                 if ( is_a($resultado, 'WP_Error' )) {
-                    //$message = $resultado->errors;
                     $messages = $resultado->get_error_messages();
                 }
-
             }
-
         } else {
             echo "No guardes el usuario";
             
@@ -126,8 +115,46 @@ class AdminUsersPage{
      * Presenta la lista de usuarios.
      */
     public function userAdminPageContent() {
+        isset($_REQUEST['action'])  ? $action = $_REQUEST['action'] : $action = '';
+        isset($_REQUEST['user_id']) ? $userId = $_REQUEST['user_id'] : $user_id = '';
+        isset($_POST['user_ids']) ? $user_ids = $_POST['user_ids'] : $user_ids = '';
+
+        $mensaje_resultado = '';
+        
+        //Miramos el parámetro 'action' para ver si borramos uno o dos usuarios.
+        switch ($action) {
+            case 'delete':
+                $mensaje_action = "Borrar el usuario: " . $userId;
+                //Usar la clase User para borrar el usuario indicado por $userId
+                $arrayId = explode(" ", $userId);
+                $result = $this->user->deleteUsers($arrayId);
+                if ($result == false) {
+                    $mensaje_resultado = "Ha habido un error al eliminar los usuarios ";
+                } else {
+                    $mensaje_resultado = "Se han elmiinado {$result} usuario(s)";
+                }
+
+
+                break;
+            case 'delete-users':
+                $mensaje_action = "borrar los usuarios";
+                $result = $this->user->deleteUsers($user_ids);
+                if ($result == false) {
+                    $mensaje_resultado = "Ha habido un error al eliminar los usuarios ";
+                } else {
+                    $mensaje_resultado = "Se han elmiinado {$result} usuario(s)";
+                }
+
+                break;
+            default:
+                $mensaje_action = "No hagas nada";
+                break;
+        }
         $usersList = $this->user->getUsers();
-        echo $this->template->render('users-list.html.twig', ['userList' => $usersList]);
+        echo $this->template->render('users-list.html.twig', ['userList' => $usersList, 
+                                                              'mensaje_action' => $mensaje_action, 
+                                                              'user_ids' => $user_ids, 
+                                                              'mensaje_resultado' => $mensaje_resultado] );
     }//End UserAdminPageContent();
 
 

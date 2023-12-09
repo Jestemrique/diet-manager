@@ -117,4 +117,14 @@ class Database{
     }//End insertNewEprUser();
 
 
+    //Elimina un conjunto de usuarios de la tabla epr_users a partir de un array de id de usuarios.
+    public function deleteEprUsers(  $listaIdUsers ){
+        $sql = "DELETE FROM {$this->table_users} WHERE user_id IN (" . implode(', ', array_fill(0, count($listaIdUsers), '%s')) . ")";
+        $query = call_user_func_array(array($this->eprdb, 'prepare'), array_merge(array($sql), $listaIdUsers));
+        $queryResult = $queryResult = $this->eprdb->query($query);
+
+        return $queryResult;
+    }//End $listaIdUsers()
+
+
 }//End database.
