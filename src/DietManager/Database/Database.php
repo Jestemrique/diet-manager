@@ -7,6 +7,7 @@ class Database{
     private $eprdb = null;
     private $table_users = 'epr_users';
     private $table_daily_diet = 'epr_daily_diet';
+    private $table_plan_alimentacion = 'epr_plan_alimentacion';
 
     public function __construct(){
         global $wpdb;
@@ -31,6 +32,7 @@ class Database{
         require_once ( ABSPATH . 'wp-admin/includes/upgrade.php');
         $this->createTableUsers();
         $this->createTableDailyDiet();
+        $this->createTablePlanAlimentacion();
     }//End createTables();
 
     //Create table for users
@@ -72,15 +74,31 @@ class Database{
     private function createTableDailyDiet() {
         dbDelta( "CREATE TABLE IF NOT EXISTS {$this->table_daily_diet}
                 (
-                    daily_diet_id bigint (20) unsigned NOT NULL,
-                    dia datetime,
-                    desayuno text (80),
-                    almuerzo text (80),
-                    merienda text (80),
-                    cena text (80)
+                    dieta_dia_plan_id bigint (20) unsigned NOT NULL,
+                    dieta_dia_id bigint (20) unsigned NOT NULL,
+                    dieta_dia_dia datetime,
+                    dieta_dia_desayuno text (80),
+                    dieta_dia_almuerzo text (80),
+                    dieta_dia_merienda text (80),
+                    dieta_dia_cena text (80),
+                    dieta_dia_observaciones MEDIUMTEXT,
+                    PRIMARY KEY (dieta_dia_id)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
                 ");
     }//End createTableDailyDient()
+
+    //Crear la tabla para los plan de alimentación.
+    private function createTablePlanAlimentacion(){
+        dbDelta( "CREATE TABLE IF NOT EXISTS {$this->table_plan_alimentacion}
+                (
+                    plan_id bigint (20) unsigned NOT NULL,
+                    plan_nombre text (150),
+                    plan_usuario bigint (20) unsigned NOT NULL,
+                    plan_observaciones MEDIUMTEXT,
+                    PRIMARY KEY (plan_id)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+                ");
+    }//End createTablePlanAlimentacion()
 
     public function updateUser($user, $user_id){
         $this->eprdb->update(

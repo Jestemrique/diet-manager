@@ -184,8 +184,8 @@ class AdminUsersPage{
         wp_enqueue_script('bootstrapjs', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js');
     }
 
-    private function crea_nuevo_usuario(){
-        echo "hola";
-    }
+    // private function crea_nuevo_usuario(){
+    //     echo "hola";
+    // }
 
 }//End AdminUsersPage

@@ -19,6 +19,7 @@ use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 
 use Epr\DietManager\AdminPages\AdminUsersPage;
+use Epr\DietManager\AdminPages\AdminPlanDietPage;
 use Epr\DietManager\Users\User;
 
 
@@ -42,6 +43,7 @@ $template = new Environment($templatesFolder);
 
 
 $usersAdminPage = new AdminUsersPage($users, $template);
+$planAlimentacionAdminPage = new AdminPlanDietPage($template);
 
 
 

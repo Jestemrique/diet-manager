@@ -13,4 +13,6 @@ services:
     arguments:
       - '@epr.user'
       - '@epr.db'
+  epr.planadminpages:
+    class: Epr\DietManager\AdminPages\AdminPlanDietPage
 
