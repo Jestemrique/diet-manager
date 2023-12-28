@@ -8,6 +8,10 @@ services:
     class: Epr\DietManager\Users\User
     arguments:
       - '@epr.db'
+  epr.planalimentacion:
+    class: Epr\DietManager\PlanDieta\PlanAlimentacion
+    arguments:
+      - '@epr.db'
   epr.adminpages:
     class: Epr\DietManager\AdminPages\AdminUsersPage
     arguments:

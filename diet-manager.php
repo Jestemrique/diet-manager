@@ -21,6 +21,7 @@ use Twig\Environment;
 use Epr\DietManager\AdminPages\AdminUsersPage;
 use Epr\DietManager\AdminPages\AdminPlanDietPage;
 use Epr\DietManager\Users\User;
+use Epr\DietManager\PlanDieta\PlanAlimentacion;
 
 
 $container = new ContainerBuilder();
@@ -32,7 +33,7 @@ $db = $container->get('epr.db');
 $db->createTables();
 
 $users = new User($db);
-
+$planAlimentacion = new PlanAlimentacion($db);
 //add_action( 'user_register', array($users, 'registerUser'));
 
 
@@ -43,7 +44,7 @@ $template = new Environment($templatesFolder);
 
 
 $usersAdminPage = new AdminUsersPage($users, $template);
-$planAlimentacionAdminPage = new AdminPlanDietPage($template);
+$planAlimentacionAdminPage = new AdminPlanDietPage($planAlimentacion, $template);
 
 
 

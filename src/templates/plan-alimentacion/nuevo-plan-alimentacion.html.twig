@@ -3,7 +3,96 @@
     <h2>Diet Planner. Nuevo plan de alimentación</h1>
     <hr>
 
+    <form action="admin.php?page=plan-alimentacion-form" method="POST">
+      <div class="form-group">
+        <label for="nombrePlan">Nombre</label>
+        <input type="text" class="form-control" id="nombrePlan" aria-describedby="nombrePlan" placeholder="Introduzca un nombre para el plan">
+      </div>
     
+      <div class="form-group">
+        <label for="usuarioPlan">Usuario</label>
+        <input type="text" class="form-control" id="usuarioPlan" placeholder="Introduzca nombre de usuario">
+      </div>
+
+      <div class="form-group">
+        <label for="observacionesPlan">Notas</label>
+        <textarea class="form-control" id="observacionesPlan" rows="3"></textarea>
+      </div>
+
+
+    <hr>
+    <br>
+    <br>
+
+
+
+
+    <table id="tableDietPlan" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Día</th>
+                <th scope="col">Desayuno</th>
+                <th scope="col">Comida</th>
+                <th scope="col">Merienda</th>
+                <th scope="col">Cena</th>
+                <th scope="col">Notas</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div>
+                <input type="date" id="dia" name="dia">
+              </div>
+            </td>    
+            
+            <td>
+              <div>
+                <input type="text" class="form-control" placeholder="Desayuno">
+              </div>
+            </td>
+
+            <td>
+              <div>
+                <input type="text" class="form-control" placeholder="Comida">
+              </div>
+            </td>
+
+            <td>
+              <div>
+                <input type="text" class="form-control" placeholder="Merienda">
+              </div>
+            </td>
+
+            <td>
+              <div>
+                <input type="text" class="form-control" placeholder="Cena">
+              </div>
+            </td>
+
+            <td>
+              <div>
+                <input type="text" class="form-control" placeholder="Notas">
+              </div>
+            </td>
+
+            <td>
+              <div>
+                <button  id="eliminarDia">-</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" id="addDia">Añadir día</button>
+    <br>
+    <br>
+    <hr>
+    <br>
+
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="{{nonce}}" />
+    <button type="submit" name="submit" class="btn btn-primary px-4 float-right">Guardar plan</button>
+  </form>
 
 </div>
 
